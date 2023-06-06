@@ -6,25 +6,29 @@
 }
 
 .footer-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 10px;
   text-align: center;
 
   color: #545454;
 
-  margin-bottom: 10px;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    margin-bottom: 0;
+  }
 }
 
-.text-second-line {
-  display: block;
+.pice1 {
+  margin-right: 10px;
 }
 
-.footer-modal-btn-open {
-  border: none;
-  padding: 0;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.pice2 {
+  margin-right: 10px;
 }
 
-.footer-modal-btn-decaration {
+.pice4 {
   text-decoration: underline;
+  cursor: pointer;
 }
