@@ -1,5 +1,6 @@
 .header {
   height: 230px;
+  margin-bottom: 60px;
   background-image: url('../images/mobile/background-mobile.jpg');
 
   @media screen and (min-width: 768px) {
@@ -71,6 +72,7 @@
     width: 336px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
   }
 }
 
@@ -149,4 +151,11 @@
 
 .filter:first-child + label {
   margin-right: 20px;
+}
+
+.error-search-message {
+  text-align: center;
+  color: #ff001b;
+  font-size: 14px;
+  line-height: 16px;
 }
