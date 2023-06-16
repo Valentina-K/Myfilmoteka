@@ -5,12 +5,7 @@ function clearContent(elem) {
 }
 
 function creatGalleryItems(items) {
-  console.log(itemTemplate);
-  /* return `
-  <p>Ggggg</p>`; */
-  /* const markup = test(); */
   const markup = itemTemplate(items);
-  console.log(markup);
   return markup;
 }
 

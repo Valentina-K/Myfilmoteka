@@ -1,10 +1,19 @@
-import pagination from './js/pagination';
+import { pagination } from './js/pagination';
 import renderApi from './js/gallery';
 
 import API from './js/api';
 const instanceAPI = new API();
 
 window.addEventListener('load', getTrend);
+pagination.on('afterMove', event => {
+  instanceAPI.setcurrentPage(event.page);
+  getTrend();
+});
+pagination.on('beforeMove', event => {
+  if (event.page === 10) {
+    return false;
+  }
+});
 
 async function getTrend() {
   try {

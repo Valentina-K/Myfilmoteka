@@ -5,14 +5,14 @@ const KEY = '53502f2051b49635b4821c401e9fb0d7';
 
 export default class MovieApiServices {
   constructor() {
-    this.page = 1;
+    this.currentPage = 1;
     this.searchQuery = '';
     this.counttotalResults = 0;
   }
 
   async getTrendingMovies() {
     const response = await axios.get(
-      `/trending/movie/day?api_key=${KEY}&page=${this.page}`
+      `/trending/movie/day?api_key=${KEY}&page=${this.currentPage}`
     );
     this.counttotalResults += 20;
     return response.data;
@@ -22,7 +22,7 @@ export default class MovieApiServices {
     const response = await axios.get(
       `/search/movie?api_key=${KEY}&query=${encodeURIComponent(
         query
-      ).replaceAll('%20', '+')}&page=${this.page}&language=en-US`
+      ).replaceAll('%20', '+')}&page=${this.currentPage}&language=en-US`
     );
     this.counttotalResults += 20;
     return response.data;
@@ -45,8 +45,12 @@ export default class MovieApiServices {
     return findGenre.name;
   }
 
-  incrementPage() {
-    this.page += 1;
+  getcurrentPage() {
+    return this.currentPage;
+  }
+
+  setcurrentPage(newPage) {
+    this.currentPage = newPage;
   }
 
   get query() {

@@ -1,10 +1,31 @@
+.gallery-content {
+  margin-right: auto;
+  margin-left: auto;
+  width: 280px;
+
+  @media screen and (min-width: 768px) {
+    width: 704px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 1217px;
+  }
+}
 .gallery {
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px 32px;
+  gap: 20px;
   margin-bottom: 60px;
+
+  @media screen and (min-width: 768px) {
+    gap: 32px;
+  }
+
+  @media screen and (min-width: 768px) {
+    gap: 32px 16px;
+  }
 }
 
 .gallery__item {
