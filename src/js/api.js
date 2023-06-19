@@ -8,6 +8,7 @@ export default class MovieApiServices {
     this.currentPage = 1;
     this.searchQuery = '';
     this.counttotalResults = 0;
+    this.currentMethod = 0;
   }
 
   async getTrendingMovies() {
@@ -51,6 +52,14 @@ export default class MovieApiServices {
 
   setcurrentPage(newPage) {
     this.currentPage = newPage;
+  }
+
+  get c_method() {
+    return this.currentMethod;
+  }
+
+  set c_method(newMethod) {
+    this.currentMethod = newMethod;
   }
 
   get query() {
