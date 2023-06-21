@@ -10,10 +10,12 @@ const refs = {
   searchInput: document.querySelector('.shearch-text'),
   errorSearch: document.querySelector('.error-search-message'),
   preloaderElem: document.querySelector('.preloader'),
+  paginationElem: document.querySelector('.tui-pagination'),
 };
-
+console.dir(pagination);
 window.addEventListener('load', getTrend);
-pagination.on('afterMove', event => {
+
+pagination.on('beforeMove', event => {
   instanceAPI.setcurrentPage(event.page);
   prepareGallery();
   const func = instanceAPI.c_method
@@ -21,15 +23,18 @@ pagination.on('afterMove', event => {
     : instanceAPI.getTrendingMovies;
   getData(func, instanceAPI.c_method);
 });
-pagination.on('beforeMove', event => {
-  if (event.page === 10) {
-    return false;
-  }
-});
 refs.searchForm.addEventListener('submit', onSearch);
+refs.searchInput.addEventListener('focus', onFocus);
+
+function onFocus(evt) {
+  evt.target.value = '';
+  instanceAPI.setcurrentPage(1);
+  pagination.reset();
+}
 
 function onSearch(evt) {
   evt.preventDefault();
+  refs.searchInput.blur();
   instanceAPI.searchQuery = evt.currentTarget.elements[0].value.trim();
   if (instanceAPI.searchQuery) {
     prepareGallery();
@@ -45,14 +50,19 @@ function getTrend() {
 async function getData(funct, method) {
   try {
     const response = await funct();
+    pagination.setTotalItems(response.total_results);
+    console.dir(pagination);
     const data = response.results;
-    if (data.total_results === 0) {
+    if (data.length === 0) {
+      refs.preloaderElem.classList.toggle('is-hidden');
       refs.errorSearch.classList.remove('is-hidden');
+      refs.paginationElem.classList.add('is-hidden');
     } else {
       instanceAPI.c_method = method;
       parseData(data);
       refs.preloaderElem.classList.toggle('is-hidden');
       renderContent(data);
+      refs.paginationElem.classList.remove('is-hidden');
     }
   } catch (error) {}
 }
@@ -75,32 +85,8 @@ function parseData(data) {
   });
 }
 
-/*
-function onGotFocus(evt) {
-  console.log('from onGotFocus');
-  evt.currentTarget.value = '';
-}
-
-async function onShowMore() {
-  instanceAPI.incrementPage();
-  try {
-    const response = await instanceAPI.getImages();
-
-    renderContent(response.data.hits);
-    smoothScrolling();
-    gallery.refresh();
-    if (instanceAPI.countHits >= response.totalHits) {
-      throw error;
-    }
-  } catch (error) {
-    refs.btnLoadMore.classList.add('is-hidden');
-    Notiflix.Notify.warning(
-      "We're sorry, but you've reached the end of search results."
-    );
-  }
-} */
-
 function renderContent(content) {
+  refs.errorSearch.classList.add('is-hidden');
   const markup = renderApi.creatGalleryItems(content);
   renderApi.makeupContent(markup, refs.gallery);
 }
