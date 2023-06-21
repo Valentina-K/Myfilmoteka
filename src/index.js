@@ -7,6 +7,7 @@ const instanceAPI = new API();
 const refs = {
   searchForm: document.querySelector('.search-form'),
   gallery: document.querySelector('.js-gallery'),
+  galleryItem: document.querySelector('.gallery__item'),
   searchInput: document.querySelector('.shearch-text'),
   errorSearch: document.querySelector('.error-search-message'),
   preloaderElem: document.querySelector('.preloader'),
@@ -25,6 +26,9 @@ pagination.on('beforeMove', event => {
 });
 refs.searchForm.addEventListener('submit', onSearch);
 refs.searchInput.addEventListener('focus', onFocus);
+refs.galleryItem.addEventListener('click', onClick);
+
+function onClick() {}
 
 function onFocus(evt) {
   evt.target.value = '';

@@ -1,0 +1,85 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+.modal {
+  padding: 20px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  color: #000000;
+}
+.modal-backdrop-img {
+  height: 416px;
+}
+.modal-title {
+  font-size: 20px;
+  line-height: 23px;
+
+  text-transform: uppercase;
+}
+/* .modal-description {
+  font-weight: 500;
+  font-size: 12px;
+  color: #000000;
+} */
+.table-head {
+  line-height: 16px;
+  color: #8c8c8c;
+}
+.table-value {
+  line-height: 14px;
+}
+.vote {
+  display: inline-block;
+  width: 36px;
+  border-radius: 5px;
+}
+.vote.average {
+  color: #ffffff;
+  background: #ff6b01;
+}
+.vote.count {
+  background: #f7f7f7;
+}
+.about {
+  text-transform: uppercase;
+  line-height: 16px;
+}
+.overview {
+  line-height: 20px;
+}
+.buttons {
+  display: flex;
+}
+.button {
+  width: 136px;
+  height: 44px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.watched {
+  color: #ffffff;
+  background: #ff6b01;
+}
+.queue {
+  background-color: inherit;
+}
