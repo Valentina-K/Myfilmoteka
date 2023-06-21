@@ -11,35 +11,35 @@ export default class MovieApiServices {
     this.currentMethod = 0;
   }
 
-  async getTrendingMovies() {
+  getTrendingMovies = async () => {
     const response = await axios.get(
       `/trending/movie/day?api_key=${KEY}&page=${this.currentPage}`
     );
     this.counttotalResults += 20;
     return response.data;
-  }
+  };
 
-  async getSearchMovies(query) {
+  getSearchMovies = async () => {
     const response = await axios.get(
       `/search/movie?api_key=${KEY}&query=${encodeURIComponent(
-        query
+        this.searchQuery
       ).replaceAll('%20', '+')}&page=${this.currentPage}&language=en-US`
     );
     this.counttotalResults += 20;
     return response.data;
-  }
+  };
 
-  async getMovieById(movieId) {
+  getMovieById = async movieId => {
     const response = await axios.get(`/movie/${movieId}?api_key=${KEY}`);
     return response.data;
-  }
+  };
 
-  async getMovieByIdVideo(movieId) {
+  getMovieByIdVideo = async movieId => {
     const response = await axios.get(
       `/movie/${movieId}/videos?api_key=${KEY}&language=en-US'`
     );
     return response.data;
-  }
+  };
 
   getGenres(genresId) {
     const findGenre = genres.find(genre => genre.id === genresId);
