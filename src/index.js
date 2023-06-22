@@ -12,6 +12,7 @@ const refs = {
   errorSearch: document.querySelector('.error-search-message'),
   preloaderElem: document.querySelector('.preloader'),
   paginationElem: document.querySelector('.tui-pagination'),
+  modalElem: document.querySelector('.modal'),
 };
 console.dir(pagination);
 window.addEventListener('load', getTrend);

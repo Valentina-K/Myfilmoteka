@@ -1,17 +1,22 @@
+<button class="close-btn"> 
+  <svg width="30" height="30">
+    <use href="../images/icons.svg#icon-close"></use>
+  </svg>
+</button>
 <img class="modal-backdrop-img" src="{{backdrop_path}}" alt="{{title}}" />
-  
+  <div class="block-wrapper">
   <div class="modal-description">
     <table>
         <caption class="modal-title">{{title}}</caption>
-      <tr>
+      <tr class="row">
         <td class="table-head">Vote/Votes</td>
         <td class="table-value"><span class="vote average">{{vote_average}}</span>/<span class="vote count">{{vote_count}}</span></td>
       </tr>
-      <tr>
+      <tr class="row">
         <td class="table-head">Popularity</td>
         <td class="table-value">{{popularity}}</td>
       </tr>
-      <tr>
+      <tr class="row">
         <td class="table-head">Original title</td>
         <td class="table-value">{{original_title}}</td>
       </tr>
@@ -21,11 +26,12 @@
       </tr>
     </table>
   </div>
-  <div >
+  <div class="about-wrapper">
     <h3 class="about">About</h3>
     <p class="overview">{{overview}}</p>
   </div>
   <div class="buttons">
     <button type="button" class="button watched">Add to watched</button>
     <button type="button" class="button queue">Add to queue</button>
+  </div>
   </div>
