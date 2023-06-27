@@ -1,5 +1,6 @@
 import { pagination } from './js/pagination';
 import renderApi from './js/gallery';
+import renderModal from './js/modal';
 import API from './js/api';
 
 const instanceAPI = new API();
@@ -7,15 +8,17 @@ const instanceAPI = new API();
 const refs = {
   searchForm: document.querySelector('.search-form'),
   gallery: document.querySelector('.js-gallery'),
-  galleryItem: document.querySelector('.gallery__item'),
+  galleryItem: document.querySelector('.gallery'),
   searchInput: document.querySelector('.shearch-text'),
   errorSearch: document.querySelector('.error-search-message'),
   preloaderElem: document.querySelector('.preloader'),
   paginationElem: document.querySelector('.tui-pagination'),
-  modalElem: document.querySelector('.modal'),
+  modalElem: document.querySelector('.modal-content'),
+  closeModalBtn: document.querySelector('[data-modal-close]'),
+  modal: document.querySelector('[data-modal]'),
 };
-console.dir(pagination);
 window.addEventListener('load', getTrend);
+window.addEventListener('keydown', onEscKeyPress);
 
 pagination.on('beforeMove', event => {
   instanceAPI.setcurrentPage(event.page);
@@ -28,8 +31,42 @@ pagination.on('beforeMove', event => {
 refs.searchForm.addEventListener('submit', onSearch);
 refs.searchInput.addEventListener('focus', onFocus);
 refs.galleryItem.addEventListener('click', onClick);
+refs.closeModalBtn.addEventListener('click', onClose);
 
-function onClick() {}
+function onClose() {
+  toggleModal();
+}
+
+function onEscKeyPress(even) {
+  console.log('from esc');
+  if (even.code === 'Escape') {
+    if (!refs.modal.classList.contains('is-hidden')) {
+      toggleModal();
+    }
+  }
+}
+
+function toggleModal() {
+  refs.modal.classList.toggle('is-hidden');
+}
+
+async function onClick(evt) {
+  //
+  const response = await instanceAPI.getMovieById(evt.target.id);
+  response.vote_average = response.vote_average.toFixed(1);
+  response.popularity = response.popularity.toFixed(1);
+  response.genres.forEach(
+    (el, ind, arr) =>
+      (arr[ind] =
+        ind === arr.length - 1
+          ? instanceAPI.getGenres(el.id)
+          : instanceAPI.getGenres(el.id) + ',')
+  );
+  renderModal.clearModal(refs.modalElem);
+  const markup = renderModal.creatModalItem(response);
+  renderModal.makeupModal(markup, refs.modalElem);
+  toggleModal();
+}
 
 function onFocus(evt) {
   evt.target.value = '';
@@ -56,7 +93,6 @@ async function getData(funct, method) {
   try {
     const response = await funct();
     pagination.setTotalItems(response.total_results);
-    console.dir(pagination);
     const data = response.results;
     if (data.length === 0) {
       refs.preloaderElem.classList.toggle('is-hidden');

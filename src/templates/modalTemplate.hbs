@@ -1,37 +1,40 @@
-<button class="close-btn"> 
-  <svg width="30" height="30">
-    <use href="../images/icons.svg#icon-close"></use>
-  </svg>
-</button>
-<img class="modal-backdrop-img" src="{{backdrop_path}}" alt="{{title}}" />
-  <div class="block-wrapper">
-  <div class="modal-description">
-    <table>
-        <caption class="modal-title">{{title}}</caption>
-      <tr class="row">
-        <td class="table-head">Vote/Votes</td>
-        <td class="table-value"><span class="vote average">{{vote_average}}</span>/<span class="vote count">{{vote_count}}</span></td>
+<img
+  class='modal-backdrop-img'
+  src='http://image.tmdb.org/t/p/w400{{poster_path}}'
+  alt='{{title}}'
+/>
+<div class='block-wrapper'>
+  <div class='modal-description'>
+    <table class='table'>
+      <caption class='modal-title'>{{title}}</caption>
+      <tr class='row'>
+        <td class='table-head'>Vote/Votes</td>
+        <td class='table-value'><span
+            class='vote average'
+          >{{vote_average}}</span>
+          /
+          <span class='vote count'>{{vote_count}}</span></td>
       </tr>
-      <tr class="row">
-        <td class="table-head">Popularity</td>
-        <td class="table-value">{{popularity}}</td>
+      <tr class='row'>
+        <td class='table-head'>Popularity</td>
+        <td class='table-value'>{{popularity}}</td>
       </tr>
-      <tr class="row">
-        <td class="table-head">Original title</td>
-        <td class="table-value">{{original_title}}</td>
+      <tr class='row'>
+        <td class='table-head'>Original title</td>
+        <td class='table-value'>{{original_title}}</td>
       </tr>
       <tr>
-        <td class="table-head">Genre</td>
-        <td class="table-value">{{#each genre_ids}}{{this}} {{/each}}</td>
+        <td class='table-head'>Genre</td>
+        <td class='table-value'>{{#each genres}}{{this}} {{/each}}</td>
       </tr>
     </table>
   </div>
-  <div class="about-wrapper">
-    <h3 class="about">About</h3>
-    <p class="overview">{{overview}}</p>
+  <div class='about-wrapper'>
+    <h3 class='about'>About</h3>
+    <p class='overview'>{{overview}}</p>
   </div>
-  <div class="buttons">
-    <button type="button" class="button watched">Add to watched</button>
-    <button type="button" class="button queue">Add to queue</button>
+  <div class='buttons'>
+    <button type='button' class='button watched'>Add to watched</button>
+    <button type='button' class='button queue'>Add to queue</button>
   </div>
-  </div>
+</div>

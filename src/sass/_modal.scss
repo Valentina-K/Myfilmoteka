@@ -20,8 +20,13 @@
   position: absolute;
   top: 8px;
   right: 8px;
+  border: none;
+  background: inherit;
+  padding: 0;
 }
 .modal {
+  left: 50%;
+  transform: translateX(-50%) scale(1);
   width: 280px;
   height: 940px;
   position: relative;
@@ -30,17 +35,31 @@
   font-weight: 500;
   font-size: 12px;
   color: #000000;
+  background-color: #ffffff;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  .backdrop.is-hidden & {
+    transform: /* translate(-50%, -50%)  */ scale(0.8);
+  }
 
   @media screen and(min-width:768px) {
     width: 704px;
     height: 552px;
     padding: 40px 36px;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
   }
 
   @media screen and (min-width: 1280px) {
     width: 806px;
     height: 558px;
     padding: 40px 12px;
+  }
+}
+.modal-content {
+  display: block;
+  @media screen and (min-width: 768px) {
+    display: flex;
   }
 }
 .modal-backdrop-img {
@@ -61,18 +80,18 @@
     margin-right: 16px;
   }
 }
-.block-wrapper {
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
-}
+
 .modal-description {
   margin-bottom: 20px;
+}
+.table {
+  width: 100%;
 }
 .modal-title {
   margin-bottom: 20px;
   font-size: 20px;
   line-height: 23px;
+  text-align: left;
 
   text-transform: uppercase;
 
@@ -83,22 +102,26 @@
 .row {
   margin-bottom: 8px;
 }
-/* .modal-description {
-  font-weight: 500;
-  font-size: 12px;
-  color: #000000;
-} */
+
 .table-head {
+  width: 108px;
   line-height: 16px;
   color: #8c8c8c;
+
+  @media screen and (min-width: 768px) {
+    width: 120px;
+  }
 }
 .table-value {
+  text-overflow: ellipsis;
+  white-space: nowrap;
   line-height: 16px;
 }
 .vote {
   display: inline-block;
   width: 36px;
   border-radius: 5px;
+  text-align: center;
 }
 .vote.average {
   color: #ffffff;
@@ -108,7 +131,19 @@
   background: #f7f7f7;
 }
 .about-wrapper {
+  overflow-y: auto;
   margin-bottom: 20px;
+  width: 240px;
+  height: 220px;
+  @media screen and (min-width: 768px) {
+    width: 264px;
+    height: 260px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 391px;
+    height: 184px;
+  }
 }
 .about {
   text-transform: uppercase;
@@ -119,6 +154,11 @@
 }
 .buttons {
   display: flex;
+  justify-content: center;
+
+  @media screen and (min-width: 768px) {
+    justify-content: start;
+  }
 }
 .button {
   width: 110px;
@@ -129,6 +169,7 @@
   line-height: 16px;
   text-transform: uppercase;
   text-align: center;
+  border: none;
 
   @media screen and (min-width: 768px) {
     width: 126px;
@@ -144,5 +185,6 @@
   background: #ff6b01;
 }
 .queue {
+  border: 1px solid #000;
   background-color: inherit;
 }
